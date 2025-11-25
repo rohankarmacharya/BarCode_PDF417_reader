@@ -1,183 +1,210 @@
-# Document Scanner Application
+# Barcode & PDF417 Document Scanner
 
-A full-stack web application for scanning and processing documents (barcodes, PDF417 codes, checkbooks, and cards) with PDF report generation.
+A comprehensive full-stack web application for scanning, processing, and generating reports from various document types including barcodes, PDF417 codes, checkbooks, and cards.
 
-## Features
+![Document Scanner](https://via.placeholder.com/1200x600/4F46E5/FFFFFF?text=Barcode+PDF417+Scanner)
 
-- **Barcode Scanning**: Decode 1D and 2D barcodes using pyzbar
-- **PDF417 Decoding**: Extract data from PDF417 codes
-- **Document Upload**: Upload checkbook and card images (front/back)
-- **PDF Report Generation**: Combine all scanned data into a downloadable PDF
-- **Session Management**: Upload multiple documents and reset sessions
-- **Responsive UI**: Clean, modern interface built with React and Tailwind CSS
+## ✨ Features
 
-## Tech Stack
+- **Multi-Format Scanning**
 
-### Backend
-- **Framework**: FastAPI
-- **Image Processing**: OpenCV, Pillow
-- **Barcode Decoding**: pyzbar
-- **PDF417 Decoding**: pdf417decoder
-- **PDF Generation**: reportlab
-- **Server**: Uvicorn
+  - 1D and 2D barcode decoding
+  - PDF417 code extraction and parsing
+  - Checkbook image processing
+  - Front/back card scanning
 
-### Frontend
-- **Framework**: React 18
-- **Build Tool**: Vite
-- **Styling**: Tailwind CSS
-- **HTTP Client**: Axios
+- **Advanced Processing**
 
-## Installation
+  - Image enhancement for better recognition
+  - Multi-angle barcode detection
+  - AAMVA standard parsing for driver's licenses
+  - Automatic data validation
 
-### Backend Setup
+- **User Experience**
+  - Modern, responsive UI with dark/light mode
+  - Real-time feedback and previews
+  - Session management
+  - Downloadable PDF reports
+  - Cross-platform compatibility
 
-1. Navigate to the backend directory:
-\`\`\`bash
-cd backend
-\`\`\`
+## 🚀 Quick Start
 
-2. Create a virtual environment:
-\`\`\`bash
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-\`\`\`
+### Prerequisites
 
-3. Install dependencies:
-\`\`\`bash
-pip install -r requirements.txt
-\`\`\`
+- Python 3.8+
+- Node.js 16+
+- npm or yarn
+- OpenCV (for advanced image processing)
 
-4. Create `.env` file (optional):
-\`\`\`bash
-cp .env.example .env
-\`\`\`
+### Installation
 
-5. Run the server:
-\`\`\`bash
-python main.py
-\`\`\`
+1. **Clone the repository**
 
-The API will be available at `http://localhost:8000`
+   ```bash
+   git clone https://github.com/yourusername/barcode-pdf417-reader.git
+   cd barcode-pdf417-reader
+   ```
 
-### Frontend Setup
+2. **Set up the backend**
 
-1. Navigate to the frontend directory:
-\`\`\`bash
-cd frontend
-\`\`\`
+   ```bash
+   # Navigate to backend directory
+   cd backend
 
-2. Install dependencies:
-\`\`\`bash
-npm install
-\`\`\`
+   # Create and activate virtual environment
+   python -m venv venv
+   # On Windows: venv\Scripts\activate
+   source venv/bin/activate
 
-3. Start the development server:
-\`\`\`bash
-npm run dev
-\`\`\`
+   # Install dependencies
+   pip install -r requirements.txt
+   ```
 
-The application will be available at `http://localhost:5173`
+3. **Set up the frontend**
 
-## API Endpoints
+   ```bash
+   # Navigate to frontend directory
+   cd ../frontend
 
-### Health Check
-- **GET** `/health` - Check if API is running
+   # Install dependencies
+   npm install
+   ```
 
-### Session Management
-- **GET** `/session` - Get current session data
-- **POST** `/reset` - Clear all uploads and reset session
+### Running the Application
 
-### Upload Endpoints
-- **POST** `/upload/barcode` - Upload and decode barcode image
-- **POST** `/upload/pdf417` - Upload and decode PDF417 image
-- **POST** `/upload/checkbook` - Upload checkbook scan
-- **POST** `/upload/card` - Upload card front and/or back
+1. **Start the backend server**
 
-### Report Generation
-- **GET** `/generate-pdf` - Generate and download combined PDF report
+   ```bash
+   cd backend
+   python main.py
+   ```
 
-## Usage
+   The API will be available at `http://localhost:8000`
 
-1. Start both backend and frontend servers
-2. Open the application in your browser
-3. Upload documents using the scanner cards:
-   - Barcode Scanner: Upload barcode images
-   - PDF417 Scanner: Upload PDF417 code images
-   - Checkbook Scanner: Upload checkbook scans
-   - Card Scanner: Upload card front and back
-4. View uploaded items in the Report section
-5. Click "Generate & Download PDF" to create a combined report
-6. Click "Reset Session" to clear all uploads and start over
+2. **Start the frontend development server**
+   ```bash
+   cd frontend
+   npm run dev
+   ```
+   The application will be available at `http://localhost:5173`
 
-## File Structure
+## 🛠️ API Documentation
 
-\`\`\`
-project/
-├── backend/
-│   ├── main.py              # FastAPI application
-│   ├── decoders.py          # Image decoding logic
+### Base URL
+
+```
+http://localhost:8000
+```
+
+### Endpoints
+
+#### Health Check
+
+- `GET /health` - Verify API status
+
+#### Session Management
+
+- `GET /session` - Retrieve current session data
+- `POST /reset` - Clear all uploads and reset session
+
+#### Document Processing
+
+- `POST /upload/barcode` - Process barcode images
+- `POST /upload/pdf417` - Decode PDF417 codes
+- `POST /upload/checkbook` - Handle checkbook scans
+- `POST /upload/card` - Process card images (front/back)
+
+#### Report Generation
+
+- `GET /generate-pdf` - Generate and download PDF report
+
+## 📁 Project Structure
+
+```
+barcode-pdf417-reader/
+├── backend/                  # FastAPI backend
+│   ├── main.py              # Main application and routes
+│   ├── decoders.py          # Barcode and PDF417 decoding logic
 │   ├── pdf_generator.py     # PDF report generation
-│   ├── config.py            # Configuration
+│   ├── config.py            # Application configuration
 │   ├── requirements.txt     # Python dependencies
-│   └── .env.example         # Environment variables template
-├── frontend/
+│   └── uploads/             # Temporary file storage
+│
+├── frontend/                # React frontend
 │   ├── src/
-│   │   ├── App.jsx          # Main app component
-│   │   ├── components/      # React components
-│   │   ├── App.css          # Styles
-│   │   ├── main.jsx         # Entry point
-│   │   └── index.css        # Global styles
-│   ├── package.json         # Node dependencies
-│   ├── vite.config.js       # Vite configuration
-│   ├── tailwind.config.js   # Tailwind configuration
-│   └── postcss.config.js    # PostCSS configuration
+│   │   ├── components/      # Reusable UI components
+│   │   │   ├── BarcodeScanner.jsx
+│   │   │   ├── PDF417Scanner.jsx
+│   │   │   ├── CheckbookScanner.jsx
+│   │   │   ├── CardScanner.jsx
+│   │   │   └── ReportSection.jsx
+│   │   ├── App.jsx          # Main application component
+│   │   └── main.jsx         # Application entry point
+│   ├── public/              # Static assets
+│   ├── package.json         # Frontend dependencies
+│   └── vite.config.js       # Vite configuration
+│
+├── .gitignore
 └── README.md
-\`\`\`
+```
 
-## Troubleshooting
+## 🧪 Testing
 
-### Backend Issues
+### Backend Tests
 
-**"Failed to fetch" error in frontend**
-- Ensure backend is running on `http://localhost:8000`
-- Check CORS configuration in `main.py`
-- Verify all dependencies are installed
+```bash
+cd backend
+pytest
+```
 
-**Barcode/PDF417 not detected**
-- Ensure image quality is good
-- Try different image formats (PNG, JPG, BMP)
-- Check image resolution (higher resolution images work better)
+### Frontend Tests
 
-### Frontend Issues
+```bash
+cd frontend
+npm test
+```
 
-**Vite dev server not starting**
-- Clear node_modules and reinstall: `rm -rf node_modules && npm install`
-- Check Node.js version (requires Node 14+)
+## 🐛 Troubleshooting
 
-**Tailwind styles not applying**
-- Ensure Tailwind CSS is properly configured
-- Run `npm run build` to rebuild
+### Common Issues
 
-## Development
+**Barcode/PDF417 Not Detected**
 
-### Adding New Decoders
+- Ensure good lighting conditions
+- Use high-resolution images
+- Try different angles and distances
+- Verify image format (PNG, JPG, BMP supported)
 
-1. Create a new decoder class in `backend/decoders.py`
-2. Add corresponding endpoint in `backend/main.py`
-3. Create React component in `frontend/src/components/`
-4. Add component to `frontend/src/App.jsx`
+**Installation Problems**
 
-### Customizing PDF Report
+- Ensure all system dependencies are installed
+- Check Python and Node.js versions
+- Clear npm/pip caches if needed
 
-Edit `backend/pdf_generator.py` to modify:
-- Report layout and styling
-- Included data fields
-- Image sizing and positioning
+**API Connection Issues**
 
-## License
+- Verify backend server is running
+- Check CORS settings in `backend/main.py`
+- Ensure no port conflicts (default: 8000 for backend, 5173 for frontend)
 
-MIT
+## 🤝 Contributing
 
-## Support
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-For issues or questions, please open an issue in the repository.
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 📧 Contact
+
+For support or questions, please open an issue in the repository or contact [your-email@example.com](mailto:your-email@example.com).
+
+---
+
+<div align="center">
+  Made with ❤️ by Your Name | [![GitHub](https://img.shields.io/github/followers/yourusername?style=social)](https://github.com/yourusername)
+</div>
