@@ -201,10 +201,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📧 Contact
 
-For support or questions, please open an issue in the repository or contact [your-email@example.com](mailto:your-email@example.com).
+For support or questions, please open an issue in the repository or contact [rohankarmacharya.biz@gmail.com](mailto:rohankarmacharya.biz@gmail.com).
 
 ---
 
 <div align="center">
-  Made with ❤️ by Your Name | [![GitHub](https://img.shields.io/github/followers/yourusername?style=social)](https://github.com/yourusername)
+  Made with ❤️ by me, Sandesh Dhakal and Sohan Achhami | [![GitHub](https://img.shields.io/github/followers/rohankarmacharya?style=social)](https://github.com/rohankarmacharya)
 </div>
